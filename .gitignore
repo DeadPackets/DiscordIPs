@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Project specific files
+resolvers.txt
+discord_ranges.txt
+resolved_domains.txt
+discord_domains.txt
