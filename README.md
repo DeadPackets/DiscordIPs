@@ -35,8 +35,8 @@ The following steps take place inside the scripts included in this repository:
 
 ## TODOs
 
-[X] Add documentation to README
-[X] Add more output to python scripts
-[X] Create requirements.txt
-[ ] Create Github Action to automatically run everything
-[ ] Add customization to python scripts based on command-line arguments
+- [X] Add documentation to README
+- [X] Add more output to python scripts
+- [X] Create requirements.txt
+- [ ] Create Github Action to automatically run everything
+- [ ] Add customization to python scripts based on command-line arguments
