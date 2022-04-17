@@ -1,5 +1,10 @@
 {
     "cSpell.enableFiletypes": [
         "!python"
+    ],
+    "cSpell.words": [
+        "cidrize",
+        "massdns",
+        "southafrica"
     ]
 }

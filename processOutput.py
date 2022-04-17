@@ -2,7 +2,10 @@ import ipaddress
 from cidrize import cidrize
 
 # Process the output file and turn it into a set, eliminating duplicates
-resolved_domains = set([ipaddress.ip_address(line.split(' ')[2]) for line in open('resolved_domains.txt', 'r').read().split('\n') if len(line.split(' ')) == 3 and 'com' not in line])
+massdns_output = open('resolved_domains.txt', 'r').read().split('\n')
+resolved_domains = set([ipaddress.ip_address(line.split(' ')[2]) for line in massdns_output if len(line.split(' ')) == 3 and 'com' not in line])
+print(f'Resolved IP addresses: {len(massdns_output)}')
+print(f'Unique IP addresses: {len(resolved_domains)}')
 
 # Sort the IP addresses
 sorted_ips = sorted(resolved_domains)
@@ -20,14 +23,14 @@ for ip in sorted_ips:
             count += 1
             temp_ip.append(ip)
         else:
-            # It is no longer following, so reset count and save group
-            count = 0
-
             # Just a quick check if we only have 1 IP
             if len(temp_ip) == 1:
                 ip_ranges.update(cidrize(str(temp_ip[0]), strict=True))
             else:
                 ip_ranges.update(cidrize(f'{str(temp_ip[0])}-{str(temp_ip[-1]).split(".")[-1]}', strict=True))
+
+            # It is no longer following, so reset count and save group
+            count = 0
 
             # Reset the tracked IPs
             temp_ip = [ip,]
@@ -36,6 +39,7 @@ for ip in sorted_ips:
 
 # Now we have a list of CIDRs, transform them into comma seperated format
 output_ranges = ','.join([str(ip_range) for ip_range in ip_ranges])
+print(f'Generated {len(ip_ranges)} CIDRs.')
 
 # Open the output file
 output_file = open('discord_ranges.txt', 'w')
