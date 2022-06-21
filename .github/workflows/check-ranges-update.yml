@@ -1,0 +1,29 @@
+name: Check for Discord Ranges update
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "* */12 * * *" # every 12 hours
+
+jobs:
+  check-discord-ranges-update:
+    name: Check Discord Ranges Update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          architecture: 'x64'
+      - name: Download MassDNS
+        uses: actions/checkout@v3
+        with:
+          repository: 'blechschmidt/massdns'
+      - name: Compile and Install MassDNS
+        run: |
+          cd ${{ github.workspace }}/massdns && make install
+      - name: Run the dns_brute script
+        run: python ./dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt
+
