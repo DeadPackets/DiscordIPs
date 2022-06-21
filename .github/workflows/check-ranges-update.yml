@@ -24,7 +24,7 @@ jobs:
           path: massdns
       - name: Compile and Install MassDNS
         run: |
-          cd ${{ github.workspace }}/massdns && make && make install
+          cd ${{ github.workspace }}/massdns && make && sudo make install
       - name: Run the dns_brute script
-        run: python ./dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt
+        run: python ${{ github.workspace }}/DiscordIPs/dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt
 
