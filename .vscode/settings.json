@@ -6,5 +6,6 @@
         "cidrize",
         "massdns",
         "southafrica"
-    ]
+    ],
+    "python.formatting.provider": "black"
 }

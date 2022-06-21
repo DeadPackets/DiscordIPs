@@ -35,8 +35,9 @@ The following steps take place inside the scripts included in this repository:
 
 ## TODOs
 
-- [X] Add documentation to README
+- [ ] Update documentation in README
 - [X] Add more output to python scripts
 - [X] Create requirements.txt
 - [ ] Create Github Action to automatically run everything
-- [ ] Add customization to python scripts based on command-line arguments
+- [X] Add customization to python scripts based on command-line arguments
+- [ ] Update documentation for the two different methods used in this repo (`dns_brute` and `shodan_query`)
