@@ -97,7 +97,7 @@ domain_list.close()
 
 # Use cloudflare dns resolver
 resolver_list = open(f"{temp_dir.name}/resolvers.txt", "w")
-resolver_list.write("1.1.1.1\n")
+resolver_list.write("1.1.1.1\n1.0.0.1\n")
 resolver_list.flush()
 resolver_list.close()
 
@@ -111,8 +111,9 @@ massdns_run = subprocess.Popen(
         f"{temp_dir.name}/discord_domains.txt",
         "-t",
         "A",
+        "--verify-ip",
         "-o",
-        "S",
+        "Sm",
         "-w",
         f"{temp_dir.name}/resolved_ips.txt",
         "-q",
