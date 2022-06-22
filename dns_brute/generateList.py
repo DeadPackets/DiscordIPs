@@ -97,7 +97,7 @@ domain_list.close()
 
 # Use cloudflare dns resolver
 resolver_list = open(f"{temp_dir.name}/resolvers.txt", "w")
-resolver_list.write("1.1.1.1\n1.0.0.1\n")
+resolver_list.write("8.8.8.8\n8.8.4.4\n")
 resolver_list.flush()
 resolver_list.close()
 
@@ -124,6 +124,10 @@ massdns_run = subprocess.Popen(
 massdns_run.communicate()
 massdns_run.wait()
 print("Massdns run finished.")
+
+# Open the resolved IP addresses file
+resolved_ips_unique = open(f"{temp_dir.name}/resolved_ips.txt", "r").read()
+print(f"Found {len(resolved_ips_unique.splitlines())} resolved IP addresses.")
 
 # Run the command to extract the resolved IP addresses
 filter_output = subprocess.Popen(f"cat {temp_dir.name}/resolved_ips.txt | grep 'A' | cut -d' ' -f3 | grep -E '[0-9]{{1,3}}\.[0-9]{{1,3}}\.[0-9]{{1,3}}\.[0-9]{{1,3}}' | sort -u | uniq > {temp_dir.name}/resolved_ips_unique.txt", shell=True)
