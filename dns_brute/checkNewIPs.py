@@ -64,6 +64,6 @@ if new_ranges_hash != current_ranges_hash:
     embed.set_footer(text="https://github.com/DeadPackets/DiscordIPs")
     embed.set_timestamp()
     embed.add_embed_field(name='New Ranges Hash', value=new_ranges_hash)
-    embed.add_embed_field(name='Number of IPs', value=str(len(new_ranges_file.decode('utf-8').splitlines())))
+    embed.add_embed_field(name='Number of IPs', value=str(len(new_ranges_file.decode('utf-8').split(','))))
     webhook.add_embed(embed)
     webhook.execute()
