@@ -27,7 +27,8 @@ jobs:
         run: |
           cd ${{ github.workspace }}/massdns && make && sudo make install
       - name: Install dns_brute requirements
-        run: pip install -r ${{ github.workspace }}/dns_brute/requirements.txt
+        run: pip install -r ${{ github.workspace }}/dns_brute/requirements.txt && pip install discord-webook
       - name: Run the dns_brute script
         run: python ${{ github.workspace }}/dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt -d
-
+      - name: Check the SHA256 sum of the new ranges and compare against the file
+        run: python ${{ github.workspace }}/dns_brute/checkNewIPs.py /tmp/resolved_ips_unique.txt ${{ github.workspace }}/dns_brute/latest_sha256.txt ${{ github.workspace }}/dns_brute/latest_ranges.txt ${{ secrets.DISCORD_WEBHOOK_URL }}

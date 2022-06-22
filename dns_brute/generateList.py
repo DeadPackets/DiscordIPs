@@ -166,6 +166,9 @@ for result_line in resolved_ips_file.splitlines():
 # Open the unique resolved IP addresses file
 print(f"Found {len(resolved_ips_unique)} unique resolved IP addresses.")
 
+# Sort the unique resolved IP addresses
+resolved_ips_unique = sorted(resolved_ips_unique)
+
 # Write the unique resolved ip addresses to a file
 resolved_ips_unique_file = open(args.output, "w")
 resolved_ips_unique_file.write("/32,".join(resolved_ips_unique) + "/32\n")
