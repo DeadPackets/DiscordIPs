@@ -41,7 +41,6 @@ if new_ranges_hash != current_ranges_hash:
     print("New ranges found!")
 
     # Replace the latest_sha256.txt file
-    new_ranges_file.close()
     current_ranges_hash_file.close()
 
     overwrite_current_ranges = open(args.sha256_file, 'w')
