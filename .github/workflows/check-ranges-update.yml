@@ -32,3 +32,10 @@ jobs:
         run: python ${{ github.workspace }}/dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt -d
       - name: Check the SHA256 sum of the new ranges and compare against the file
         run: python ${{ github.workspace }}/dns_brute/checkNewIPs.py /tmp/resolved_ips_unique.txt ${{ github.workspace }}/dns_brute/latest_sha256.txt ${{ github.workspace }}/dns_brute/latest_ranges.txt ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Remove massdns from the repo
+        run: cd ${{ github.workspace }} && rm -rf ${{ github.workspace }}/massdns
+      - name: Push updates to repo
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          message: Updated repository with new IP ranges
