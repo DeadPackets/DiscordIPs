@@ -61,8 +61,7 @@ if new_ranges_hash != current_ranges_hash:
             description=f"Find the newest ranges here: https://github.com/DeadPackets/DiscordIPs/blob/main/dns_brute/latest_ranges.txt",
             color='03b2f8'
     )
-    embed.set_author('DiscordIP Bot', url="https://github.com/DeadPackets/DiscordIPs")
-    embed.set_footer('Screw VOIP blocking!')
+    embed.set_footer('https://github.com/DeadPackets/DiscordIPs')
     embed.set_timestamp()
     embed.add_embed_field(name='New Ranges Hash', value=new_ranges_hash)
     embed.add_embed_field(name='Number of IPs', value=str(len(new_ranges_file.decode('utf-8').splitlines())))
