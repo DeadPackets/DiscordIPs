@@ -29,5 +29,5 @@ jobs:
       - name: Install dns_brute requirements
         run: pip install -r ${{ github.workspace }}/dns_brute/requirements.txt
       - name: Run the dns_brute script
-        run: python ${{ github.workspace }}/dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt
+        run: python ${{ github.workspace }}/dns_brute/generateList.py -r us-east -i 10000 -o /tmp/resolved_ips_unique.txt -d
 

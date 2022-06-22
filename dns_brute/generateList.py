@@ -51,6 +51,13 @@ parser.add_argument(
     help="The file to write the output to. Default is ./resolved_ips_unique.txt",
     default="resolved_ips_unique.txt",
 )
+parser.add_argument(
+    "-d",
+    "--debug",
+    action="store_true",
+    help="Print debug information to stdout.",
+    default=False
+)
 args = parser.parse_args()
 
 # Create a temporary folder for results
@@ -164,6 +171,10 @@ resolved_ips_unique_file = open(args.output, "w")
 resolved_ips_unique_file.write("/32,".join(resolved_ips_unique) + "/32\n")
 resolved_ips_unique_file.flush()
 resolved_ips_unique_file.close()
+
+# Output resolved ips if debug is enabled
+if args.debug:
+    print("/32,".join(resolved_ips_unique) + "/32\n")
 
 # Clean the temporary directory
 temp_dir.cleanup()
