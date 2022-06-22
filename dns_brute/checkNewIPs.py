@@ -50,7 +50,7 @@ if new_ranges_hash != current_ranges_hash:
 
     # Write the current ranges to the repo
     overwrite_repo_ranges = open(args.new_repo_ranges, 'wb')
-    overwrite_current_ranges.write(new_ranges_file)
+    overwrite_repo_ranges.write(new_ranges_file)
     overwrite_repo_ranges.flush()
     overwrite_repo_ranges.close()
 
