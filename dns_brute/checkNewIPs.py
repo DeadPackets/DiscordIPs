@@ -57,11 +57,11 @@ if new_ranges_hash != current_ranges_hash:
     # Trigger discord webhook
     webhook = DiscordWebhook(url=args.discord_webhook_url, rate_limit_retry=True)
     embed = DiscordEmbed(
-            title="Discord Ranges Updated!",
-            description=f"Find the newest ranges here: https://github.com/DeadPackets/DiscordIPs/blob/main/dns_brute/latest_ranges.txt",
-            color='03b2f8'
+        title="Discord Ranges Updated!",
+        description=f"Screw VOIP blocking! Find the newest ranges here: https://github.com/DeadPackets/DiscordIPs/blob/main/dns_brute/latest_ranges.txt",
+        color='03b2f8'
     )
-    embed.set_footer('https://github.com/DeadPackets/DiscordIPs')
+    embed.set_footer(text="https://github.com/DeadPackets/DiscordIPs")
     embed.set_timestamp()
     embed.add_embed_field(name='New Ranges Hash', value=new_ranges_hash)
     embed.add_embed_field(name='Number of IPs', value=str(len(new_ranges_file.decode('utf-8').splitlines())))
