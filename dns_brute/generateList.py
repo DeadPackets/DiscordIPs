@@ -1,8 +1,10 @@
-import re
-import requests
 import argparse
-import tempfile
+import re
 import subprocess
+import tempfile
+
+import dns.resolver
+import requests
 
 # Defaults/Globals
 REGIONS = {
@@ -126,24 +128,40 @@ massdns_run.wait()
 print("Massdns run finished.")
 
 # Open the resolved IP addresses file
-resolved_ips_unique = open(f"{temp_dir.name}/resolved_ips.txt", "r").read()
-print(f"Found {len(resolved_ips_unique.splitlines())} resolved IP addresses.")
+resolved_ips_file = open(f"{temp_dir.name}/resolved_ips.txt", "r").read()
+print(f"Found {len(resolved_ips_file.splitlines())} resolved IP addresses.")
 
-# Run the command to extract the resolved IP addresses
-filter_output = subprocess.Popen(f"cat {temp_dir.name}/resolved_ips.txt | grep 'A' | cut -d' ' -f3 | grep -E '[0-9]{{1,3}}\.[0-9]{{1,3}}\.[0-9]{{1,3}}\.[0-9]{{1,3}}' | sort -u | uniq > {temp_dir.name}/resolved_ips_unique.txt", shell=True)
+# Loop through the resolved IPs and get the unique IPs
+resolved_ips_unique = set()
+for result_line in resolved_ips_file.splitlines():
 
-# Wait for command to finish
-filter_output.communicate()
-filter_output.wait()
-print("Finished filtering the resolved IP addresses.")
+    # Split each massdns response into its components
+    _hostname, answer_type, answer = result_line.split(' ')
+
+    # A simple check to get rid of any funny responses
+    if answer == '127.0.0.1':
+        continue
+
+    # Check if we got an A record or CNAME
+    if answer_type == 'A':
+        resolved_ips_unique.add(answer)
+    elif answer_type == 'CNAME':
+        # Use DNSPython to resolve domain name
+        resolver = dns.resolver.Resolver(configure=False)
+        resolver.nameservers = ["8.8.8.8", "8.8.4.4"]
+        answer = resolver.resolve(answer, "A")
+
+        if len(answer) == 0:
+            continue
+        else:
+            resolved_ips_unique.add(answer[0].to_text())
 
 # Open the unique resolved IP addresses file
-resolved_ips_unique = open(f"{temp_dir.name}/resolved_ips_unique.txt", "r").read()
-print(f"Found {len(resolved_ips_unique.splitlines())} unique resolved IP addresses.")
+print(f"Found {len(resolved_ips_unique)} unique resolved IP addresses.")
 
 # Write the unique resolved ip addresses to a file
 resolved_ips_unique_file = open(args.output, "w")
-resolved_ips_unique_file.write("/32,".join(resolved_ips_unique.splitlines()) + "/32\n")
+resolved_ips_unique_file.write("/32,".join(resolved_ips_unique) + "/32\n")
 resolved_ips_unique_file.flush()
 resolved_ips_unique_file.close()
 
