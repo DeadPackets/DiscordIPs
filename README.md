@@ -7,19 +7,35 @@ A set of Python scripts (and a Github Action!) to curate a list of IP ranges tha
 - `*.discord.gg`: All the Voice Chat servers of Discord
 - `*.discord.media`: All the streaming/video servers of Discord
 - Currently, the following Discord regions exist:
-  - `sydney`
+  - `atlanta`
   - `brazil`
-  - `us-east`
-  - `us-central`
-  - `us-west`
-  - `us-south`
-  - `russia`
-  - `india`
+  - `bucharest`
+  - `buenos-aires`
+  - `dubai`
+  - `finland`
+  - `frankfurt`
   - `hongkong`
-  - `singapore`
-  - `southafrica`
+  - `india`
   - `japan`
+  - `madrid`
+  - `milan`
+  - `newark`
   - `rotterdam`
+  - `santa-clara`
+  - `santiago`
+  - `seattle`
+  - `singapore`
+  - `south-korea`
+  - `southafrica`
+  - `stage-scale`
+  - `stockholm`
+  - `sydney`
+  - `tel-aviv`
+  - `us-central`
+  - `us-east`
+  - `us-south`
+  - `us-west`
+  - `warsaw`
 - You can find a list of updated Discord-related domains [here](https://github.com/v2fly/domain-list-community/blob/master/data/discord)
 
 ## How It Works
