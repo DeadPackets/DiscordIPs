@@ -1,9 +1,7 @@
 name: Check for Discord Ranges update
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "* */12 * * *" # every 12 hours
+  workflow_dispatch: # schedule disabled – project is deprecated
 
 jobs:
   check-discord-ranges-update:
