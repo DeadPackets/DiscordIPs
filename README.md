@@ -1,5 +1,11 @@
 # DiscordIPs
 
+> [!WARNING]
+> **This project is deprecated and this repository has been archived.**
+> Modern WireGuard applications now allow tunnelling specific programs without needing to map all the IPs, which was the original purpose of this project. As a result, maintaining this IP list is no longer necessary.
+>
+> For an alternative solution, consider using [WireSock](https://www.wiresock.net/), which supports process-level routing and eliminates the need to manually track Discord IP ranges.
+
 A set of Python scripts (and a Github Action!) to curate a list of IP ranges that belong to Discord or run Discord services to be used with applications such as WireGuard.
 
 ## What We Know
